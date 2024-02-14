@@ -16,6 +16,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install dependencies
+        run: npm i
+
       - name: Run worker.js
         run: node action-worker.js
         env:
