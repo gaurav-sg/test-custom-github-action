@@ -20,7 +20,7 @@ async function run() {
         console.log(`Pull request action: ${action}`);
 
         // Get commit messages associated with the pull request
-        const octokit = github.getOctokit(core.getInput('github_token'));
+        const octokit = github.getOctokit(core.getInput('GITHUB_TOKEN'));
         const { data: commits } = await octokit.rest.pulls.listCommits({
           owner: github.context.repo.owner,
           repo: github.context.repo.repo,
