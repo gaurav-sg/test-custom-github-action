@@ -21,6 +21,7 @@ async function run() {
 
         // Get commit messages associated with the pull request
         const octokit = github.getOctokit(core.getInput('GITHUB_TOKEN'));
+
         const { data: commits } = await octokit.rest.pulls.listCommits({
           owner: github.context.repo.owner,
           repo: github.context.repo.repo,
@@ -30,6 +31,7 @@ async function run() {
         // Extract Jira issue keys from commit messages
         const keys = [];
         commits.forEach(commit => {
+          console.log(commit.commit.message);
           const match = commit.commit.message.match(/FUZE-[0-9]*/g);
           if (match) {
             keys.push(...match);
