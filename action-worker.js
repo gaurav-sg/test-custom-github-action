@@ -31,7 +31,7 @@ async function run() {
         // Extract Jira issue keys from commit messages
         const keys = [];
         commits.forEach(commit => {
-          console.log(commit.commit.message);
+          console.log('commit messages', commit.commit.message);
           const match = commit.commit.message.match(/FUZE-[0-9]*/g);
           if (match) {
             keys.push(...match);
@@ -47,7 +47,7 @@ async function run() {
         // Handle push event
         console.log('Push event');
         const commits = github.context.payload.commits;
-        console.log(commits);
+        console.log('Commit Information', commits);
       } else {
         console.log('Unsupported event');
       }
