@@ -20,7 +20,7 @@ async function run() {
         console.log(`Pull request action: ${action}`);
 
         // Get commit messages associated with the pull request
-        const octokit = github.getOctokit(core.getInput('GITHUB_TOKEN'));
+        const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
 
         const { data: commits } = await octokit.rest.pulls.listCommits({
           owner: github.context.repo.owner,
@@ -46,6 +46,8 @@ async function run() {
       } else if (eventName === 'push') {
         // Handle push event
         console.log('Push event');
+        const commits = github.context.payload.commits;
+        console.log(commits);
       } else {
         console.log('Unsupported event');
       }
