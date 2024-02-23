@@ -12,7 +12,7 @@ async function run() {
       const eventName = github.context.eventName;
       
       console.log(`Event name: ${eventName}`);
-      await updateJiraTicketStatus(1,2);
+      await updateJiraTicketStatus('FUZE-1', 'FUZE-2');
       
       // Check if it's a pull_request event
       if (eventName === 'pull_request') {
@@ -39,7 +39,6 @@ async function run() {
           }
         });
         console.log(`Jira Keys: ${keys}`);
-       
         if (keys.length === 0) {
           core.warning('No Jira issue keys found in commit messages.');
           return;
@@ -62,7 +61,8 @@ async function run() {
 
   async function updateJiraTicketStatus(ticketId, statusId) {
     // @todo do via proper axios call / error handling etc
-    // make token dynamic / 
+    // make token dynamic
+    // before updating status check the current status of jira Ticket
     // const command = `curl -D- -u ${core.getInput('jira_username')}:${core.getInput('jira_token')} -X POST -H "Content-Type: application/json" --data '{"transition": {"id": "${core.getInput('new_status_id')}"}' ${core.getInput('jira_domain')}/rest/api/2/issue/${key}/transitions`;
     const command = `ls -ltr`;
     execSync(command);
